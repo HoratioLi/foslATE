@@ -1,0 +1,189 @@
+#!/usr/bin/env python
+import time
+import pyaudio
+import wave
+import numpy as np
+from array import array
+import csv
+def peak_freq_mag(data, fs, sound_freq):
+    data = array('I', data)
+    #get length
+    N = len(data)
+    
+    #tolerance for picking max frequency (in Hz)
+    tolerance = 1500
+    
+    #grab FFT's of length 11025, with 50% overlap --> 7 windows in 44100 samples (one second)
+    data1 = data[0:11025]
+    data1 = data1 - np.mean(data1)
+    data1 = data1*np.hamming(11025)
+    data1 = np.fft.fft(data, 11025)
+    data1 = np.absolute(data1)
+    data1 = 10*np.log10(data1)
+
+    data2 = data[5513:16538]
+    data2 = data2 - np.mean(data2)
+    data2 = data2*np.hamming(11025)
+    data2 = np.fft.fft(data, 11025)
+    data2 = np.absolute(data2)
+    data2 = 10*np.log10(data2)
+
+    data3 = data[11025:22050]
+    data3 = data3 - np.mean(data3)
+    data3 = data3*np.hamming(11025)
+    data3 = np.fft.fft(data, 11025)
+    data3 = np.absolute(data3)
+    data3 = 10*np.log10(data3)
+
+    data4 = data[16538:27563]
+    data4 = data4 - np.mean(data4)
+    data4 = data4*np.hamming(11025)
+    data4 = np.fft.fft(data, 11025)
+    data4 = np.absolute(data4)
+    data4 = 10*np.log10(data4)
+
+    data5 = data[22050:33075]
+    data5 = data5 - np.mean(data5)
+    data5 = data5*np.hamming(11025)
+    data5 = np.fft.fft(data, 11025)
+    data5 = np.absolute(data5)
+    data5 = 10*np.log10(data5)
+
+    data6 = data[27563:38588]
+    data6 = data6 - np.mean(data6)
+    data6 = data6*np.hamming(11025)
+    data6 = np.fft.fft(data, 11025)
+    data6 = np.absolute(data6)
+    data6 = 10*np.log10(data6)
+
+    data7 = data[33075:44100]
+    data7 = data7 - np.mean(data7)
+    data7 = data7*np.hamming(11025)
+    data7 = np.fft.fft(data, 11025)
+    data7 = np.absolute(data7)
+    data7 = 10*np.log10(data7)
+    
+    #get the average FFT
+    data_fft = (data1 + data2 + data3 + data4 + data5 + data6 + data7)/7
+
+    #generate the frequency index corresponding to the length of the data
+    freq_ind = range(0, fs/2, 4)
+    
+    #look for a peak in the frequency
+    peak_freq = 0;
+    peak_mag = 0;
+    lower_bound = sound_freq - tolerance
+    upper_bound = sound_freq + tolerance
+    for i in range(0, len(freq_ind)):
+        if (freq_ind[i] > lower_bound) and (freq_ind[i] < upper_bound):
+            if data_fft[i] > peak_mag:
+                peak_mag = data_fft[i]
+                peak_freq = freq_ind[i]
+                #print freq_ind[i], data_fft[i]
+
+    print peak_freq, peak_mag
+    
+    #save the parsed result in out.csv (for debugging). the file is (frequency in Hz, magnitude in dB)
+    file = open("out.csv", 'wt')
+    writer = csv.writer(file)
+    for i in range(0, len(data)):
+       writer.writerow([0, data[i]])
+
+    print abs(sound_freq - peak_freq)
+    if abs(sound_freq - peak_freq) < 500:
+        print 'passed'
+    else:
+        print 'failed'
+
+    return (peak_freq, peak_mag)
+
+
+CHUNK = 1024 / 2
+FORMAT = pyaudio.paInt16
+CHANNELS = 1
+RATE = 44100
+RECORD_SECONDS = 1
+WAVE_OUTPUT_FILENAME = "output.wav"
+
+p = pyaudio.PyAudio()
+
+stream = p.open(format=FORMAT,
+                channels=CHANNELS,
+                rate=RATE,
+                input=True,
+                frames_per_buffer=CHUNK)
+
+print("* recording")
+
+frames = []
+
+for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
+    data = stream.read(CHUNK)
+    frames.append(data)
+
+print("* done recording")
+
+stream.stop_stream()
+stream.close()
+p.terminate()
+
+wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
+wf.setnchannels(CHANNELS)
+wf.setsampwidth(p.get_sample_size(FORMAT))
+wf.setframerate(RATE)
+wf.writeframes(b''.join(frames))
+wf.close()
+
+#wf = wave.open(WAVE_OUTPUT_FILENAME, 'r')
+
+
+#peak_freq_mag(b''.join(frames), RATE, 4000)
+
+time.sleep(2)
+
+chunk = 44100 / 2 
+
+# open up a wave
+wf = wave.open(WAVE_OUTPUT_FILENAME, 'rb')
+swidth = wf.getsampwidth()
+RATE = wf.getframerate()
+# use a Blackman window
+window = np.blackman(chunk)
+# open stream
+p = pyaudio.PyAudio()
+stream = p.open(format =
+                p.get_format_from_width(wf.getsampwidth()),
+                channels = wf.getnchannels(),
+                rate = RATE,
+                output = True)
+
+# read some data
+data = wf.readframes(chunk)
+# play stream and find the frequency of each chunk
+while len(data) == chunk*swidth:
+    # write data out to the audio stream
+    stream.write(data)
+    # unpack the data and times by the hamming window
+    indata = np.array(wave.struct.unpack("%dh"%(len(data)/swidth),\
+                                         data))*window
+    # Take the fft and square each value
+    fftData=abs(np.fft.rfft(indata))**2
+    # find the maximum
+    which = fftData[1:].argmax() + 1
+    # use quadratic interpolation around the max
+    if which != len(fftData)-1:
+        y0,y1,y2 = np.log(fftData[which-1:which+2:])
+        x1 = (y2 - y0) * .5 / (2 * y1 - y2 - y0)
+        # find the frequency and output it
+        thefreq = (which+x1)*RATE/chunk
+        print "The freq is %f Hz." % (thefreq)
+    else:
+        thefreq = which*RATE/chunk
+        print "The freq is %f Hz." % (thefreq)
+    # read some more data
+    data = wf.readframes(chunk)
+if data:
+    stream.write(data)
+stream.close()
+p.terminate()
+

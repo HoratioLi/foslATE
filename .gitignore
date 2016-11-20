@@ -1,0 +1,14 @@
+*.log
+*.py[co]
+.project
+.pydevproject
+settings.cfg
+src/local_constants.py
+src/ate_settings.py
+src/pyblehci/*
+
+# Packages
+log
+test
+coverage/
+.rvmrc

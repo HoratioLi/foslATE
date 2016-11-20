@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=uploadLogFiles
+Comment=Runs /home/pi/misfit/ShineProduction/src/processLogFiles.py
+Icon=/usr/share/pixmaps/python.xpm
+Exec=lxterminal -e "/home/pi/misfit/ShineProduction/src/scripts/postLogFiles.sh"
+Type=Application
+Encoding=UTF-8
+Terminal=false
+Categories=None;

@@ -1,0 +1,127 @@
+#!/usr/bin/env python
+'''
+Created on 2015-10-09
+
+@author: James Quen
+'''
+
+import pexpect
+import subprocess
+import os
+import re
+
+def updateFlasher():
+    """
+    The updateFlasher function performs the upgrade of the SEGGER flasher.  
+    It checks for connection to the flasher and if the programming was successful.
+    Returns error code of 0 for success, -1 for flasher not connected, and -2 for failed programming.
+    """
+
+    # Change directory to be able to call git
+    os.chdir("/home/pi/misfit/ShineProduction/src/")
+
+    # Delete all tags
+    # git tag -l | xargs git tag -d
+    # TODO: Write a function that handles command line with pipe(s)
+    listTags = subprocess.Popen("git tag -l".split(), stdout=subprocess.PIPE)
+    deleteTags = subprocess.Popen("xargs git tag -d".split(), stdin=listTags.stdout, stdout=subprocess.PIPE)
+    listTags.stdout.close()
+    deleteTags.communicate()
+    listTags.wait()
+
+    # Error code of 0 indicates successful programming.
+    errorCode = 0
+    message = ""
+
+    GIT_PASSWORD_PROMPT = "Enter passphrase for key \'\/home\/pi\/\.ssh\/id_rsa\'\:"
+    GIT_PASSWORD = "d@ly374"
+    GIT_PULL = "git pull origin pluto_master_upgrade_flasher"
+    GIT_FETCH = "git fetch"
+
+    # git pull to get latest branch update
+    # TODO: Write a function that handles the git pull command.
+    pull = pexpect.spawn(GIT_PULL)
+    response = pull.expect([GIT_PASSWORD_PROMPT, "fatal\:", pexpect.EOF])
+
+    # If the response is the prompt for the password, enter the password.
+    if response == 0:
+        pull.sendline(GIT_PASSWORD)
+
+    # If the response is fatal or EOF, return error code and message.
+    elif response == 1 or response == 2:
+        return (-3, pull.before)
+
+    #git fetch to get latest tags
+    # TODO: Write a function that handles the git fetch command.
+    fetch = pexpect.spawn(GIT_FETCH)
+    response = fetch.expect([GIT_PASSWORD_PROMPT, "fatal\:", pexpect.EOF])
+
+    # If the response is the prompt for the password, enter the password.
+    if response == 0:
+        fetch.sendline(GIT_PASSWORD)
+
+    # If the response is fatal or EOF, return error code and message.
+    elif response == 1 or response == 2:
+        return (-3, fetch.before)
+
+    COMMAND_PROMPT = "J-Link\>"
+    EXECUTABLE = "/home/pi/misfit/ShineProduction/src/segger/./JLinkExe"
+    DATA_FILE = "/home/pi/misfit/ShineProduction/src/segger/FLASHER.DAT"
+
+    # Perform lsusb | grep SEGGER to see if SEGGER is connected.  If it's not connected, return an error code of -1.
+    # TODO: Write a function that handles command line with pipe(s)
+    lsusb = subprocess.Popen("lsusb", stdout=subprocess.PIPE)
+    grep = subprocess.Popen("grep SEGGER".split(), stdin=lsusb.stdout, stdout=subprocess.PIPE)
+    lsusb.stdout.close()
+    output = grep.communicate()[0]
+    lsusb.wait()
+
+    # Check the output
+    output = " ".join(output.split()[-3:])
+
+    if output == "SEGGER J-Link ARM":
+
+        # Run the JLink executable
+        child = pexpect.spawn(EXECUTABLE)
+
+        # Expect the command prompt
+        child.expect(COMMAND_PROMPT)
+
+        # Write file <file name on flasher to write> <local file name to write>
+        child.send("fwr FLASHER.DAT " + DATA_FILE + "\r")
+
+        # Expect the command prompt
+        child.expect(COMMAND_PROMPT)
+
+        # Get the programming status
+        programmingStatus = " ".join(child.before.split()[-2:])
+
+        # Check the status of programming.  If it fails to program, print out the error and return error code of -2.
+        if programmingStatus == "written successfully.":
+            try:
+                message = subprocess.check_output("git tag --contains HEAD".split()).split("\n")
+                print message
+
+                for line in message:
+                    if re.match("*\.ship_mode", line):
+                        message = line
+                        break
+                message = "Programming successful with " + message 
+                #message = "Programming successful with " + subprocess.check_output("git name-rev --tags --name-only HEAD".split()).strip().split("^")[0]
+            except:
+                message = "Programming is successful without FW version name.  Contact Rebel for confirmation of update."
+        else:
+            # Print out the error message.
+            message = child.before.split('\r\n')[-2]
+            errorCode = -2
+
+        # Quit JLink exe.
+        child.send("q\r")
+
+    else:
+        message = "SEGGER is not connected.  Please connect SEGGER directly to ATE."
+        errorCode = -1
+
+    return (errorCode, message)
+
+

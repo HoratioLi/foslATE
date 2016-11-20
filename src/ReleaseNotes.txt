@@ -1,0 +1,440 @@
+=========================================================================================
+2016-03-17
+Version: ATE.SAM.0.0.3.dev_cm3
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - src/config/sam.py - Changed rev, updated lower limits of movement current consumption.
+ - src/segger/FLASHER_SAM.DAT - S21.0.1x.sam.prod FW.
+=========================================================================================
+2016-03-16
+Version: ATE.SAM.0.0.2.dev_cm3
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - src/config/common.py - Changed SERIAL_TIMEOUT to .25 seconds to ensure reading SWO data.
+ - src/config/sam.py - Updated rev, current limits, and test order.
+ - src/controller/ble_commands.py - Added SAM support.
+ - src/controller/stationTests.py - Added in RTC Part ID, DRV Part ID, DRV Calibration, and Movement tests.
+ - src/controller/tests/helper.py - Added this file as a helper for the stationTests.py.  To be used in the future.
+ - src/model/device.py - Added in the classes for RTC Part ID, DRV Part ID, DRV Calibration, and Movement tests.
+ - src/segger/FLASHER_SAM.DAT - S21.0.0x.sam.prod FW.
+=========================================================================================
+2016-02-17
+Version: ATE.Pluto.1.7.4.dev
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - src/config/pluto.py - Update rev. In ATE 2, remove Captouch BT Calibration test, added Vibe BT Magnitude Test.
+ - src/controller/ble_commands.py - Add implementation of getVibeMagnitude.
+ - src/controller/stationTests.py - Added in Vibe Magnitude Test.
+ - src/model/bleDevice.py - Added in getter and setter functions for vibe magnitude.
+ - src/segger/FLASHER_Pluto.DAT - S21.0.22r.ship_mode.
+=========================================================================================
+2016-01-29
+Version: ATE.Pluto.1.7.3.dev
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - src/config/common.py - Adding Captouch BT Calibration to the test name map.
+ - src/config/pluto.py - Add Crystal Test limits and added test to ATE 2.
+ - src/controller/ble_commands.py - Added BLE command for Captouch BT Calibration.
+ - src/controller/stationTests.py - Added definition of Captouch BT Calibration.
+ - src/model/bleDevice.py - Added properties and getter and setter functions for MOD/COMP IDAC values.
+ - src/model/device.py - Added Captouch BT Calibration class.
+=========================================================================================
+2016-01-29
+Version: ATE.Pluto.1.7.2.dev
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - src/config/pluto.py - Updated rev, added in FW version, and added Crystal Test to ATE 1.
+ - src/controller/stationTests.py - Implemented Crystal Test for ATE 1.
+ - src/segger/FLASHER_Pluto.DAT - S21.0.22r.ship_mode
+=========================================================================================
+2016-01-29
+Version: ATE.Pluto.1.7.1.dev
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - src/controller/stationTest_commands.py - Added error handling for when an IEEE from the database is None.  Will fail the tests and properly update the FlexFlow report.
+=========================================================================================
+2016-01-18
+Version: ATE.BMW.1.9.0.prod
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - bmw.py - Changed rev.
+ - stationTest_commands.py - For 1.5, soft reset device for ATE 1.5.
+ - FLASHER_BMW.DAT - B00.0.37r.prod
+ - gui_run_tests.py - Added a counter for total tests run, passed, and failed.
+ - mainwindow.ui - Added counter for total tests run, passed, and failed.
+=========================================================================================
+2016-01-13
+Version: ATE.BMW.1.8.0.prod
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - bmw.py - Changed rev.
+ - FLASHER_BMW.DAT - B00.0.36r.prod
+=========================================================================================
+2016-01-13
+Version: ATE.BMW.1.7.0.prod
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - src/config/bmw.py - Updated rev for ATE software and FW versions.
+ - src/controller/ble_commands.py - Added hardware bluetooth command to stop LED animations.
+ - src/controller/gtk_commands.py - Added print statements when an exception is caught.  This will help with debugging.
+ - src/controller/stationTests.py - Added call to stop LED animations before the Vibe BT Current test.
+ - src/segger/FLASHER_BMW.DAT - B00.0.35r.prod.
+=========================================================================================
+2016-01-11
+Version: ATE.BMW.1.6.0.prod
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - src/constants.py - Fixed Pluto serial number scheme.
+ - src/config/bmw.py - Changed rev, added Vibe Current test to ATE 1.5, fixed serial number scheme.
+ - src/controller/stationTest_commands.py - For staging DB, skip posting data to GTK MES.
+ - src/helper/utils.py - Corrected logic for handing an empty serial number for ATE 1.5.
+=========================================================================================
+2016-01-07
+Version: ATE.Pluto.1.7.0.prod
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - src/constants.py - Moved all Pluto related information into its own configuration file.
+ - src/constants.py.orig - Removed file because it is not used.
+ - src/include.py - Added file for future use.
+ - src/params.py - Moved Pluto related information into its own configuration file.
+ - src/pluto_config_file.py - Removed file because it is not used.
+ - src/shine_production_tests.py - Added in Flex Flow support.  Mounts the Flex Flow shared folder to the local directory.
+ - src/testOrder.py - Moved Pluto related information into its own configuration file.
+ - src/testOrderBLE.py - Removed file because it is not used.
+ - src/updater.py - Added file for ATE updater. This file launches the ATE updater GUI.
+ - src/config/__init__.py - Added required file to allow importing of config module.
+ - src/config/common.py - Added common config file that is used across all projects.
+ - src/config/pluto.py - All Pluto related information resides in this file. This file contains things like test limits and test order for ATE stations.
+ - src/controller/external_commands.py - Handles formating Flex Flow file and writing it to the directory.
+ - src/controller/raspberryPi_commands.py - Added in support for other projects.
+ - src/controller/stationTest_commands.py - Added in fixes for handling duplicate serial number and not posting to the database.  Results will always be posted to the database.  Moved the write and read serial number tests to the end of ATE 2.  If all BLE tests pass in ATE 2, the serial number will be written to the device.
+ - src/model/device.py - Added in Vibe Magnitude Test and Crystal Test for future use.
+ - src/scripts/runUpdater.sh - This file initiates the call to run the updater GUI.
+ - src/segger/99-jlink.rules - The file required for interfacing with the SEGGER Flasher.
+ - src/segger/__init__.py - The file required to allow importing the segger module.
+ - src/segger/FLASHER.CFG - The Flasher config file that is copied to SEGGER when the updater is run.  This file contains configuration parameters such as write speed, etc...
+ - src/segger/FLASHER_Pluto.DAT - S21.0.21r.ship_mode - Ship mode firmware that is written to SEGGER.
+ - src/segger/JlinkExe - The file that handles updating the SEGGER.
+ - src/segger/libjlinkarm.so.5 - The soft link to the library.
+ - src/segger/libjlinkarm.so.5.2.6 - The J-Link library.
+ - src/segger/updater.ui - The GUI for the updater.
+ - src/segger/updaterController.py - The controller for the ATE updater that handles the git commands as well as copying the firmware from ATE to SEGGER.
+ - src/utilities/__init__.py - The require file for importing the uitilities module.
+ - src/utilities/gitCommands.py - The file that contains git commands such as git pull, git fetch, and getting the commit ID.
+ - src/view/gui_run_tests.py - Modified the SMT line edit box from a length of 10 to 11 because Flex Flow was not recognizing the SMT SN.
+ - transferToPi/ate_settings_master.py - Simplified this file to only include the STATION_ID, STATION_INDEX, and DEVICE constants.
+ - transferToPi/local_constants_master.py - Removed location and timezone settings because those are contained in the specific project config file.
+ - transferToPi/runATEUpdater.desktop - The icon for the updater GUI.
+ - transferToPi/setup.sh - The setup file installs pexpect and copies the J-Link rules and updater icon to their respective directories.
+=========================================================================================
+2016-01-05
+Version: ATE.BMW.1.5.0.prod
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - bmw.py - Changed rev.
+ - FLASHER_BMW.DAT - B00.0.33r.prod
+=========================================================================================
+2015-12-31
+Version: ATE.BMW.1.4.0.prod
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - bmw.py - Changed rev.
+ - FLASHER_BMW.DAT - B00.0.32r.prod
+=========================================================================================
+2015-12-30
+Version: ATE.BMW.1.3.0.prod
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - bmw.py - Changed rev.  Updated vibe current limits to 0.5 to 1.5 mA.  Added limits for x, y, and z data for accelerometer streaming test. Added Accelerometer Streaming test to ATE 1.5.
+ - ble_commands.py - Added in x and y data for Accelerometer Streaming test.
+ - +gtk_commands.py - Added in support for GTK MES.
+ - stationTest_commands.py - Added checks for duplicate serial numbers in ATE 2.  Also check if IEEE from device is valid and determine if test passed based on that result.  Added support for GTK MES.
+ - stationTests.py - Added in x and y data to analyze for Accelerometer Streaming test.  For vibe BT current test, set vibe frequency to 250 hz.
+ - utils.py - For twosComplement function, multiply data by -1 to return the negative value.
+ - FLASHER_BMW.DAT - B00.0.30r.prod
+ - setup.sh - Print out the correct arguments for ATE setup. Also added in setup for the pysimplesoap.
+=========================================================================================
+2015-12-08
+Version: ATE.Silvretta.1.3.0.prod
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - silvretta.py - Increased Operating Current upper limit to 11 uA from 10 uA.
+=========================================================================================
+2015-12-02
+Version: ATE.BMW.1.2.0.prod
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - bmw.py - Changed operating current upper limit to 15uA.  Removed operating current test from ATE 2 because device is powered by a battery for now.  Removed write, read SN, and reset from ATE 2 because it is called after all tests are run in ATE 2.
+ - constants.py - Updated rev.
+ - stationTest_commands.py - For ATE 2, use scanning method to connect to device.  Moved Write/Read SN to the end of BLE test and is only done if all tests passed.  Added some logic to handle duplicate serial number posting to DB.
+ - utils.py - Adding support for ATE1.5
+ - device.py - Changed "Duplicate Serial Test" to "Duplicate Serial Number"
+ - updaterController.py - Added support for ATE 1.5
+ - gui_run_tests.py - Hide internal serial number for BMW in ATE 2
+=========================================================================================
+2015-11-30
+Version: ATE.BMW.1.1.0.prod
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - bmw.py - Updated upper limit of LED current to 15 mA.  Lowered lower limit of operating current to 5 uA.
+ - constants.py - Updated rev.
+ - common.py - Adding vibe BT Current test to test dictionary.
+ - ble_commands.py - Added functions to start and stop vibe.
+ - stationTest_commands.py - Support ATE 1.5.
+ - stationTests.py - Added Vibe BT Current Test.  Added delay for operating current test.
+=========================================================================================
+2015-11-25
+Version: ATE.BMW.1.0.0.prod
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - bmw.py - Added parameters.
+ - constants.py - Updated rev.
+ - ble_commands.py - Added Vibe BT Magnitude Test
+ - stationTest_commands.py - Support ATE 1.5
+ - stationTests.py - Added Vibe BT Magnitude Test
+ - utils.py - Support ATE 1.5
+ - bleDevice.py - Added Vibe BT Magnitude Test
+ - device.py - Added Vibe BT Magnitude Test
+ - FLASHER_BMW.DAT - B00.0.26r.prod
+ - gui_run_tests.py - Support ATE 1.5
+ - ate_settings_master.py - Added BMW back to DEVICE_TYPE.
+ - setup.sh - Script can update ATE_ID and ATE_INDEX using arguments.  For example, ./setup.sh 2 1 will setup ATE 2-1.
+=========================================================================================
+2015-11-24
+Version: ATE.Silvretta.1.2.0.prod
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - constants.py - Moving software versions to project related config files.
+ - params.py - Moved params to config files.
+ - testOrder.py - Moved test order to config files
+ - bmw.py - Added config file for BMW.
+ - common.py - Moved in lunchbox configurations from constants.
+ - silvretta.py - Adding in software verison, Operating Current Test to ATE 2 test list, and measurement parameters for operating current.
+ - stationTests.py - In the operating current test, added a delay to allow LED animations to finish before taking a measurment.
+ - FLASHER_Silvretta.DAT - FW version C11.0.27r.prod
+ - ate_settings_master.py - Removed project name to be configured by setup.sh in the future.
+ - setup.sh - Setting up the file to configure the project based on arguments passed.
+=========================================================================================
+2015-11-18
+Version: ATE.Silvretta.1.1.0.prod
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - constants.py - Updated software rev. Removed Silvretta related settings because they are now included in another Silvretta's own configuration file.
+ - common.py - Moved more of the commonly used parameters to this file.
+ - silvretta.py - Moved commonly used parameters to common.py.  Added limits for Crystal Test.
+ - stationTest_commands.py - In the doPostTestSequence function, check if test is Crystal test and end tests if Crystal Test failed.
+ - stationTests.py - Added Crystal Test.  This test measures the duration of the pin toggles.  Expected duration is 200ms.
+ - device.py - Added Crystal Test.
+ - FLASHER_Silvretta.DAT - Updated FW to C11.0.26r.prod
+ - updaterController - Added in flexibilty to choose the correct DAT file.
+=========================================================================================
+2015-11-11
+Version: ATE.Silvretta.1.0.0.prod
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Files Added:
+ - config/common.py - This file contains settings that are shared across all projects.
+ - config/silvretta.py - This file contains all Silvretta specific configurations, parameters, and test suites.
+ - config/__init__.py - Added so the module can be imported.
+ - segger/* - Added in files for ATE updater.
+ - segger/FLASHER.DAT - Added in firmware version C11.0.24r.prod.
+Changes:
+ - constants.py - Updated software rev. Removed Silvretta related settings because they are now included in another Silvretta's own configuration file.
+ - stationTest_commands.py - Since the internal and packaging serial numbers are the same, modified code handle updating the database.
+ - gui_run_tests.py - Modified GUI to handle one serial number.  Hid the unused serial number text box and label.
+ - ate_settings_master.py - Removed most of the settings information to hide from manufacturers just incase they have to modify the file.  Only left the ATE ID and Index values along with the device type variable.
+ - local_constants_master.py - Moved the timezone constants to the constants.py file.
+=========================================================================================
+2015-11-04
+Version: ATE.Pluto.1.6.1.dev
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+ATE Upgrader
+Updates the SEGGER with the firmware and config file loaded on github.  Also updates ATE code.
+ 
+Setting up
+Run the setup.sh script to install the required modules and copy the files to the correct location.
+transferToPi/setup.sh - Installs pexpect and copies 99-jlink.rules to /etc/udev/rules.d/.  Also copies an icon called runATEUpdater to the desktop.  After the installation completes, it will reboot the system.
+Connect the SEGGER directly to Raspberry Pi using the USB cable.
+ 
+Running the application
+Double clicking the icon runs the application and opens up a GUI.
+The GUI has a status text box, a Program button, a progress bar, and a Done button.
+Clicking the Program button will initiate the upgrade by performing the following steps.
+1. Do a hard reset of the commit to ensure there are no uncommitted files.  Uncommitted files prevent git pull from working.
+2. Delete all tags because it will fetch new tags in the next few steps.
+3. Do a git pull to get the latest firmware file.  If the pull fails, update status box with error message and turn the background color red.
+4. Do a git fetch to get the latest tags.  The tags are used to confirm the firmware version. If the fetch fails, update status box with error message and turn the background color red.
+5. Check if the SEGGER is connected.  If not, it will prompt the user to connect the SEGGER directly to ATE and turn the status box red.
+6. If the SEGGER is connected, it will run J-Link and copy the firmware to the flasher.  If there is an error with the copy, the application will notify the user of the error and turn the status box red.
+7. If the copy is successful, the status box will indicate the ATE version, what firmware ship_mode version has been loaded to the flasher, and turn the status box green.  If the application cannot find the firmware version or ATE version because it was not tagged in github, it will turn the status box green and notify the user that the copy has been successful and that Rebel needs to be contacted to confirm the upgrade.  It will also display the commit hash.
+ 
+Clicking the Done button exits the application. 
+ 
+ 
+Changes:
+Added the following files.
+ - src/updater.py - This file launches the GUI.
+ - src/include.py - This file was created to include all of the files required.  This is mainly for future use.
+ - src/scripts/runUpdater.sh - This script executes the python code to launch the GUI.
+ - src/segger/99-jlink.rules - The rules that are required to use jlink.  These will be copied over to the /etc/udev/rules.d/ folder.
+ - src/segger/__init__.py - This file is required to be able to import files in the segger folder.
+ - src/segger/FLASHER.DAT - This is the ship_mode firmware file.  It is created from the J-Flasher program.  To create this file in J-Flasher, open up the APOLLO512.jflash project.  Open up the firmware by selecting File->Open data file..., and select the HEX file.  Then go to File->Save Flasher data file..., and save the file as FLASHER.DAT.  To upload the file to git, copy the DAT file to ShineProduction/src/segger, commit, push, and tag the commit with the firmware name.
+ - src/segger/FLASHER.CFG – This is the configuration file of the Flasher that has the settings for the APOLLO512.jflash project.  It is created from the J-Flasher program.  To create this file in J-Flasher, open up the APOLLO512.jflash project.  Go to File->Save Flasher config file..., and save the file as FLASHER.CFG.  To upload the file to git, copy the CFG file to ShineProduction/src/segger, commit and push.
+ - src/segger/updater.ui - This file is the GUI.
+ - src/segger/updaterController.py - This file is the controller for the application that handles GUI updates and performs the flasher update.
+ - src/segger/JLinkExe - This file is the executable.
+ - src/segger/libjlinkarm.so.5 - This file is the soft link to the jlink library.
+ - src/segger/libjlinkarm.so.5.2.6 - This file is the jlink library.
+ - src/utilities/__init__.py - This file is required to be able to import files from the utilities folder.
+ - src/utilities/gitCommands.py - This file has all of the git commands used for this application, such as, git pull, git fetch, deleting all tags, getting the current branch name, and performing a hard reset.
+ - transferToPi/runATEUpdater.desktop - This is the icon on the desktop that runs the application.
+ - transferToPi/setup.sh - This file downloads the necessary modules, copies the rules to the correct folder, creates the icon on the desktop, and reboots the system.
+ - constants.py - Updated software rev.
+=========================================================================================
+2015-10-26
+Version: ATE.Pluto.1.6.0.prod
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - constants.py - Updated software rev.  Updated PLUTO_CAPTOUCH_CAPACITANCE_LOWER to 19 pF and PLUTO_BT_CAPTOUCH_CAPACITANCE_UPPER to 76 pF to increase pass rate on ATE 1 and ATE 2.
+=========================================================================================
+2015-10-13
+Version: ATE.Pluto.1.5.0.prod
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - stationTest_commands.py - Changed the function timeoutProcessing() to capture the test that timed out.  In the function doPostTestSequence(), fixed a bug where if there was a timeout, ATE would append the timeout twice to the results list.
+ - device.py - Changed ProgramMicroTest to McuProgramming.  Removed FW version because that is checked in the BLE test.
+ - stationTest_commands.py - Added McuProgramming to the test results.  All results will now be posted to the database.  If there is no IEEE address, the IEEE address will be set to 0 and all the results will be posted there.  The internal serial number is retained as a test result.
+ - constants.py - Updated software rev.
+=========================================================================================
+2015-10-13
+Version: ATE.Pluto.1.4.2.dev
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - stationTest_commands.py - Changed the function timeoutProcessing() to capture the test that timed out.  In the function doPostTestSequence(), fixed a bug where if there was a timeout, ATE would append the timeout twice to the results list.
+ - constants.py - Updated software rev.
+=========================================================================================
+2015-10-13
+Version: ATE.Pluto.1.4.1.dev
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - device.py - Changed ProgramMicroTest to McuProgramming.  Removed FW version because that is checked in the BLE test.
+ - stationTest_commands.py - Added McuProgramming to the test results.  All results will now be posted to the database.  If there is no IEEE address, the IEEE address will be set to 0 and all the results will be posted there.  The internal serial number is retained as a test result.
+ - constants.py - Updated software rev.
+=========================================================================================
+2015-10-07
+Version: ATE.Pluto.1.4.0.prod
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - stationTests.py - In the vibeBTTest() function, stop LED animations because the tests that use I2C would cause a hard fault.
+ - testOrder.py - Added in the Mag test because the hard reset issue was resolved.
+ - stationTests.py - In the vibeTest() function, fixed a bug where the application crashes if the vibe test fails.  Application crashes because the print statement was looking for the value variables that were removed since this test only looks for the magnitude value. 
+ - constants.py - Update software rev.  Set up script to push ATE software version up to the database. 
+=========================================================================================
+2015-10-07
+Version: ATE.Pluto.1.3.2.dev
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - ble_commands.py - In the openConnection() function, stop LED animations because the tests that use I2C would cause a hard fault.
+ - testOrder.py - Added in the Mag test because the hard reset issue was resolved.
+ - constants.py - Update rev.
+=========================================================================================
+2015-10-07
+Version: ATE.Pluto.1.3.1.dev
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - stationTests.py - In the vibeTest() function, fixed a bug where the application crashes if the vibe test fails.  Application crashes because the print statement was looking for the value variables that were removed since this test only looks for the magnitude value. 
+ - constants.py - Update software rev.  Set up script to push ATE software version up to the database. 
+=========================================================================================
+2015-10-05
+Version: ATE.Pluto.1.3.0.prod
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - constants.py - Increment minor version.  Change PLUTO_BATT_BASE_VOLTAGE_THRESH_LOWER to 2750.  This voltage is used to screen for bad batteries.  Value needs to be revisited based on histogram after first 10k.  Added variable PLUTO_BATT_BASE_LOAD_VOLTAGE_DIFFERENCE = 100.  This is the limit used to determine the status of a battery. A difference of anything greater than 100 mV indicates a bad battery.
+ - params.py - Added params['batt_base_load_voltage_difference_limit'] = PLUTO_BATT_BASE_LOAD_VOLTAGE_DIFFERENCE
+ - device.py - In the BatteryTest class, added variable baseLoadDifference to save the value.
+ - stationTests.py - In the batteryBTTest function, changed the name to Battery Base and Load Voltage Difference BT Test.  Changed the test to look at the base battery voltage and the difference between the base and load voltages of the battery.  The test passes if the base voltage is 2.75V or greater and the difference is less than or equal to 100 mV.  Otherwise, the test fails.
+=========================================================================================
+2015-10-02
+Version: ATE.Pluto.1.2.0.prod
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - stationTest_commands.py - For Pluto ATE 2, added command to reset device at the start of the test suite to ensure and acurate reading
+   of captouch.  Once the device is booted/woken up, it takes a captouch measurement right away.  The measurement could
+   be inaccurate because it would also measure the capacitance that the operator introduces to the device.  The reset
+   ensures that the captouch measurement only measures the capacitance of the case.
+ - NOTE: The FW on the BLE dongle was downgraded to version 1.3.1 and has been proven to be very stable.  Using 1.4.0 has proven to be unstable at times and it's not clear why.  With 1.3.1 we are able to disconnect and reconnect to the device reliably.
+ - constants.py - Changed the Pluto RSSI lower limit to -70.  After looking at data on production DB, decided that some devices were on the edge of passing and widening limits would increase pass rate.  Still needs to be revisited after the first 10K to see what the proper RSSI limits should be.  Also added ATE_SOFTWARE_VERSION to track version.  Could be used in the future for tracking.
+=========================================================================================
+2015-10-02
+Version: ATE.Pluto.1.1.2.dev
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - constants.py - Changed the Pluto RSSI lower limit to -70.  After looking at data on production DB, decided that some devices were on the edge of passing and widening limits would increase pass rate.  Still needs to be revisited after the first 10K to see what the proper RSSI limits should be.  Also added ATE_SOFTWARE_VERSION to track version.  Could be used in the future for tracking.
+=========================================================================================
+2015-10-01
+Version: ATE.Pluto.1.1.1.dev
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - stationTest_commands.py - For Pluto ATE 2, added command to reset device at the start of the test suite to ensure and acurate reading
+   of captouch.  Once the device is booted/woken up, it takes a captouch measurement right away.  The measurement could
+   be inaccurate because it would also measure the capacitance that the operator introduces to the device.  The reset
+   ensures that the captouch measurement only measures the capacitance of the case.
+ - NOTE: The FW on the BLE dongle was downgraded to version 1.3.1 and has been proven to be very stable.  Using 1.4.0 has proven to be unstable at times and it's not clear why.  With 1.3.1 we are able to disconnect and reconnect to the device reliably.
+ - constants.py - Changed the Pluto RSSI lower limit to -70.  After looking at data on production DB, decided that some devices were on the edge of passing and widening limits would increase pass rate.  Still needs to be revisited after the first 10K to see what the proper RSSI limits should be.  Also added ATE_SOFTWARE_VERSION to track version.  Could be used in the future for tracking.
+=========================================================================================
+2015-09-29
+Version: ATE.Pluto.1.1.0.prod
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - Added script that configures the GPIOs in a safe state after boot up.
+ - In raspberryPi_commands.py, in the unlockToProgram() function, set MFG_TRIG_PIN low before powering down DUT.
+ - Increased delay time for unlock and erase to 3 seconds.
+=========================================================================================
+2015-09-28
+Version: ATE.Pluto.1.0.0.prod
+Version scheme is defined as
+<station_type>.<product>.<major>.<minor>.<internal_rev>.<prod | dev>
+Changes:
+ - Force stopping LED animations without retries.  This is done because using the sendBTCommandWRetry()
+   function did not work.  Need to understand why this doesn't work later on.
+ - Added 0.25 second delay between test cases and BLE commands to slow down and ensure stability of ATE 2.
+   This will need to be revisited and optimized after the first 10k devices.
+ - For the batterBTTest, added a 1 second delay after stopping the LED animation to ensure boost is shut off.
+ - For the vibeBTTest, added a 10 second delay after sending the command to perform vibe calibration.  The vibe calibration
+   can be approximately 10 seconds long.
+ - Changed the order of tests for ATE 2.  Moved Captouch BT Test before Battery BT test to ensure we get a capacitance reading.
+   Moved LED BT Self Test to the end in case a reset occurs.  Commented out Mag BT Self Test because resets occur frequently druing this test.  Need to investigate FW in the Mag and LED Self Tests in normal device operation.
+=========================================================================================

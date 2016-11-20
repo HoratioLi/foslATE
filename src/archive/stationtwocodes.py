@@ -1,0 +1,33 @@
+'''
+Created on 12-08-2012
+
+@author: Michael Akilian
+'''
+
+
+#=========================
+# STATION 2 FAIL CODES
+#=========================
+SCAN_FAIL = 0
+ADV_SAMPLES_FAIL = 1
+AVG_CURRENT_FAIL = 2
+CHECK_FW_FAIL = 3
+ACCEL_STREAM_FAIL = 4
+CONFIRM_LED_FAIL = 5
+SN_PROGRAM_FAIL = 6
+SN_READ_FAIL = 7
+TIMEOUT_FAIL = 8
+
+#=========================
+# STATION 2 PHASES
+#=========================
+INITIALIZE_DONGLE = 0
+SCANNING = 1
+OPERATING_CURRENT_TEST = 2
+CONNECT_TO_SHINE = 3
+GET_AND_ERASE_FILES = 4
+CHECK_FW_REV = 5
+ACCEL_STREAMING = 6
+CONFIRM_LED_CURRENT = 7
+SERIAL_PROGRAMMING = 8
+CLOSE_LINK = 9

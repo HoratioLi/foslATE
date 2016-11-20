@@ -1,0 +1,32 @@
+#! /bin/bash
+
+gpio -g mode 2 tri			#Tri-stating, as not currently used
+gpio -g mode 3 tri          #Tri-stating this pin for now since we aren't using. It will be pulled high by the attached button reading circuit.
+gpio -g mode 4 out          #Because this connects J18 to nothing instead of ground. J18 appears unused.
+gpio -g mode 14 tri         #Tri-stating this pin for now since we aren't using. It will be pulled low by the pulldown on the attached high-voltage switch.
+gpio -g mode 15 tri         #This is a connection from Rpi to DUT. We tri-state this so that we don't run the risk of back-powering the DUT through the UART line
+gpio -g mode 17 tri         #This is a connection from Rpi to DUT. We tri-state this so that we don't run the risk of back-powering the DUT through the UART line, and this is pulled low on DUT so this is even safer
+gpio -g mode 18 tri         #Tri-stating this pin for now since we aren't using. It will be pulled low by the pulldown on the attached high-voltage switch.
+gpio -g mode 22 tri         #Tri-stating this pin for now since we aren't using.
+gpio -g mode 24 out         
+gpio -g write 24 1          #Disable high side power to device. This prevents any possibility of shorting power to ground through mux, and is redundantly-safe with setting physical pin 5 to output low.
+gpio -g mode 10 out
+gpio -g write 10 0          #Guarantees that DUT -> RPi connection is DISCONNECTED on boot, to prevent back-powering of DUT (with floating line, eg)
+gpio -g mode 25 tri         #We tri-state this so that it doesn't matter what the segger does on this line before we're ready to use it.
+gpio -g mode 11 tri         #This pin is physically pulled low, so we allow it to be pulled low
+gpio -g mode 8 tri          #We tri-state this so that it doesn't matter what the segger does on this line before we're ready to use it.	
+gpio -g mode 7 tri          #We tri-state this so that it doesn't matter what the segger does on this line before we're ready to use it.
+gpio -g mode 0 tri          #Tri-stating this pin for now since we aren't using.
+gpio -g mode 1 tri          #Tri-stating this pin for now since we aren't using.
+gpio -g mode 5 out          
+gpio -g write 5 0           #To switch DMM Common to Vin DUT which is a redundant safety mechanims with the V_EN state to ensure we don't short power to ground
+gpio -g mode 6 out
+gpio -g write 6 0           #We output low to disconnect the relay in series with the pogo pin, which disconnects from DMM, which is the safest option
+
+gpio -g mode 12 tri          #Tri-stating this pin for now since we aren't using.
+gpio -g mode 13 tri          #Tri-stating this pin for now since we aren't using.
+gpio -g mode 19 tri          #Tri-stating this pin for now since we aren't using.
+gpio -g mode 16 tri          #Tri-stating this pin for now since we aren't using.
+gpio -g mode 26 tri          #Tri-stating this pin for now since we aren't using.
+gpio -g mode 20 tri          #Tri-stating this pin for now since we aren't using.
+gpio -g mode 21 tri          #Tri-stating this pin for now since we aren't using.

@@ -1,0 +1,21 @@
+'''
+Created on 13-08-2012
+
+@author: Michael Akilian
+'''
+
+#=========================
+# STATION 1 FAIL CODES
+#=========================
+UNLOCK_EFM_FAIL = 0
+PROGRAM_CC_FAIL = 1
+PROGRAM_EFM_FAIL = 2
+MCU_CURRENT_FAIL = 3
+LED_SINGLE_FAIL = 4
+LED_SIX_FAIL = 5
+SELF_ACCEL_FAIL = 6
+LOW_POWER_FAIL = 7
+FINAL_FLASH_FAIL = 8
+RSSI_FAIL = 9
+BT_TIMEOUT_FAIL = 10
+RSSI_INVALID_FAIL = 11

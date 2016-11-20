@@ -7,3 +7,5 @@ The goal of this project is to build a simple GUI to control a series of scripte
 Details of project goals available on google docs at:
 https://docs.google.com/a/misfitwearables.com/document/d/1WHU7-U5YHLWAYLIzde7_syB6M5Of05hccPJ3SRdYVhs/
 (christian@misfitwearables.com is owner)
+
+20/11/2016: New branch base on f0688e5

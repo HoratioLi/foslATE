@@ -3,7 +3,7 @@
 
 # Note: this only needs to be run once on each Pi
 printf "\n\nInstalling PIL (python imaging library)"
-cd /home/pi/misfit/ShineProduction/src/
+cd /home/pi/misfit/Production/src/
 pip install Pillow
 sudo apt-get install tk8.5-dev tcl8.5-dev
 pip install -I pillow
@@ -20,10 +20,10 @@ sudo mv desktop\ items/shutdown.desktop Desktop/
 sudo mv desktop\ items Desktop
 
 echo "Checking for log_posted and log_unposted directories..."
-LOG_POSTED_DIR=/home/pi/misfit/ShineProduction/src/log_posted
-LOG_UNPOSTED_DIR=/home/pi/misfit/ShineProduction/src/log_unposted
-LOG_NO_POST_DIR=/home/pi/misfit/ShineProduction/src/log_no_post
-LOG_UPLOAD_OUTPUT_DIR=/home/pi/misfit/ShineProduction/src/upload_log_script_output
+LOG_POSTED_DIR=/home/pi/misfit/Production/src/log_posted
+LOG_UNPOSTED_DIR=/home/pi/misfit/Production/src/log_unposted
+LOG_NO_POST_DIR=/home/pi/misfit/Production/src/log_no_post
+LOG_UPLOAD_OUTPUT_DIR=/home/pi/misfit/Production/src/upload_log_script_output
 
 if [ -d "$LOG_POSTED_DIR" ]; then
 	echo $LOG_POSTED_DIR "already exists"
@@ -54,7 +54,7 @@ else
 fi
 
 printf "\n\nRunning setupATE script\n\n"
-cd /home/pi/misfit/ShineProduction/src/
+cd /home/pi/misfit/Production/src/
 scripts/setupATEfiles.sh
 
 printf "\n\nDone with setup script.\n\n"

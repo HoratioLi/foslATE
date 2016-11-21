@@ -18,6 +18,6 @@ if [ "$_IP" ]; then
 fi
 
 
-sudo /home/pi/misfit/ShineProduction/src/gpio_config_script &
+sudo /home/pi/misfit/Production/src/gpio_config_script &
 
 exit 0

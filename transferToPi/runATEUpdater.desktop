@@ -1,8 +1,8 @@
 [Desktop Entry]
 Name=runATEUpdater
-Comment=Runs /home/pi/misfit/ShineProduction/src/updater.py
+Comment=Runs /home/pi/misfit/Production/src/updater.py
 Icon=/usr/share/pixmaps/python.xpm
-Exec=lxterminal -e "/home/pi/misfit/ShineProduction/src/scripts/runUpdater.sh"
+Exec=lxterminal -e "/home/pi/misfit/Production/src/scripts/runUpdater.sh"
 Type=Application
 Encoding=UTF-8
 Terminal=false

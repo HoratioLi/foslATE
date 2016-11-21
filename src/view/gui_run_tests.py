@@ -23,7 +23,7 @@ import sys
 from PyQt4 import QtCore, QtGui, uic
 
 log_queue = SimpleQueue()
-form_class = uic.loadUiType("/home/pi/misfit/ShineProduction/src/view/mainwindow.ui")[0]
+form_class = uic.loadUiType("/home/pi/misfit/Production/src/view/mainwindow.ui")[0]
 
 class MainWindowClass(QtGui.QMainWindow, form_class):
     def __init__(self, parent=None):
@@ -212,7 +212,7 @@ class MainWindowClass(QtGui.QMainWindow, form_class):
 
             # Check whether operating current directory exists
             if (STATION_ID == 2 or STATION_ID == 3) and (SAVE_OP_CURRENT_CSV or SAVE_OP_CURRENT_PNG):
-                subprocess.call("/home/pi/misfit/ShineProduction/src/scripts/checkOpCurrDirectory.sh")
+                subprocess.call("/home/pi/misfit/Production/src/scripts/checkOpCurrDirectory.sh")
 
             if CLI_MODE:
                 if serial_num is None:
@@ -224,7 +224,7 @@ class MainWindowClass(QtGui.QMainWindow, form_class):
                 print "\nserial_num: %s" % serial_num
                 print "serial_num_internal: %s" % serial_num_internal
                 print "serial_num_smt: %s\n" % serial_num_smt
-                subprocess.call(["/home/pi/misfit/ShineProduction/src/scripts/runStationTests.sh", serial_num, serial_num_internal, serial_num_smt],stderr=subprocess.STDOUT)
+                subprocess.call(["/home/pi/misfit/Production/src/scripts/runStationTests.sh", serial_num, serial_num_internal, serial_num_smt],stderr=subprocess.STDOUT)
                 # Read status from file
                 sf = open(STATUS_FILE,'r')
                 status = int(sf.readline())

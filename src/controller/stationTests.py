@@ -1144,7 +1144,7 @@ def batteryPlotTest(instr, params):
     endDateStr = endDate.strftime('%Y-%m-%d')
     print "Getting battery data..."    
     if CLI_MODE and True:
-        subprocess.call(["/home/pi/misfit/ShineProduction/src/scripts/runBatteryTests.sh", str(serial_number), startDateStr, endDateStr],stderr=subprocess.STDOUT)        
+        subprocess.call(["/home/pi/misfit/Production/src/scripts/runBatteryTests.sh", str(serial_number), startDateStr, endDateStr],stderr=subprocess.STDOUT)        
         # Read status from file
         sf = open(BATTERY_PASSED_FILE,'r')
         passed = sf.readline()

@@ -124,11 +124,11 @@ elif STATION_ID == 3:
 # FILE PATHS
 #===============================================================================
 
-PATH_TO_LOGS = '/home/pi/misfit/ShineProduction/src/'
-STATUS_FILE = '/home/pi/misfit/ShineProduction/src/prev_test_data/status.txt'
-BATTERY_PASSED_FILE = '/home/pi/misfit/ShineProduction/src/prev_test_data/battery_passed.txt'
-JSON_FILE = '/home/pi/misfit/ShineProduction/src/prev_test_data/test_json'
-IMAGE_FILE_PATH = '/home/pi/misfit/ShineProduction/src/view/images/batteryPlot.png'
+PATH_TO_LOGS = '/home/pi/misfit/Production/src/'
+STATUS_FILE = '/home/pi/misfit/Production/src/prev_test_data/status.txt'
+BATTERY_PASSED_FILE = '/home/pi/misfit/Production/src/prev_test_data/battery_passed.txt'
+JSON_FILE = '/home/pi/misfit/Production/src/prev_test_data/test_json'
+IMAGE_FILE_PATH = '/home/pi/misfit/Production/src/view/images/batteryPlot.png'
 
 DELIMITER = '_'
 

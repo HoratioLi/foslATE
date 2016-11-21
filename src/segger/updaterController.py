@@ -16,12 +16,12 @@ from PyQt4.QtCore import QThread, SIGNAL
 from constants import *
 
 # Add the path to the utilities module.
-sys.path.append("/home/pi/misfit/ShineProduction/src/utilities")
+sys.path.append("/home/pi/misfit/Production/src/utilities")
 
 from utilities.gitCommands import *
 
 # Load the .ui file.
-form_class = uic.loadUiType("/home/pi/misfit/ShineProduction/src/segger/updater.ui")[0]
+form_class = uic.loadUiType("/home/pi/misfit/Production/src/segger/updater.ui")[0]
 
 class performUpdate(QThread):
     """
@@ -88,9 +88,9 @@ class performUpdate(QThread):
             if response == 0:
 
                 COMMAND_PROMPT = "J-Link\>"
-                EXECUTABLE = "/home/pi/misfit/ShineProduction/src/segger/./JLinkExe"
-                DATA_FILE = "/home/pi/misfit/ShineProduction/src/segger/FLASHER_" + DEVICE_TYPE + ".DAT"
-                CONFIG_FILE = "/home/pi/misfit/ShineProduction/src/segger/FLASHER_" + MCU + ".CFG"
+                EXECUTABLE = "/home/pi/misfit/Production/src/segger/./JLinkExe"
+                DATA_FILE = "/home/pi/misfit/Production/src/segger/FLASHER_" + DEVICE_TYPE + ".DAT"
+                CONFIG_FILE = "/home/pi/misfit/Production/src/segger/FLASHER_" + MCU + ".CFG"
 
                 # Perform lsusb | grep SEGGER to see if SEGGER is connected.  If it's not connected, return an error code of -1.
                 # TODO: Write a function that handles command line with pipe(s)

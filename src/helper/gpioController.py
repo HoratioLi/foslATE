@@ -12,7 +12,7 @@ import wiringpi2
 from subprocess import call
 from PyQt4 import QtCore, QtGui, uic
 
-form_class = uic.loadUiType("/home/pi/misfit/ShineProduction/src/helper/mainwindowgpio.ui")[0]
+form_class = uic.loadUiType("/home/pi/misfit/Production/src/helper/mainwindowgpio.ui")[0]
 
 class GpioWindowClass(QtGui.QMainWindow, form_class):
     def __init__(self, parent=None):

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import sys
-sys.path.append("/home/pi/misfit/ShineProduction/src/")
+sys.path.append("/home/pi/misfit/Production/src/")
 import wiringpi2
 import time
 from multiprocessing import Process

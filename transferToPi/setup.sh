@@ -38,15 +38,15 @@ echo "Setting up $1 ATE $2-$3..."
 
 # copy config files and set ATE_ID=$2, ATE_INDEX=$3, DEVICE_TYPE=$1 in ate_settings.py
 echo "Updating ate_settings.py and local_settings.py"
-sudo cp /home/pi/misfit/ShineProduction/transferToPi/ate_settings_master.py /home/pi/misfit/ShineProduction/src/ate_settings.py
-sudo cp /home/pi/misfit/ShineProduction/transferToPi/local_constants_master.py /home/pi/misfit/ShineProduction/src/local_constants.py
+sudo cp /home/pi/misfit/Production/transferToPi/ate_settings_master.py /home/pi/misfit/Production/src/ate_settings.py
+sudo cp /home/pi/misfit/Production/transferToPi/local_constants_master.py /home/pi/misfit/Production/src/local_constants.py
 
 product=$1
 id=$2
 index=$3
 
 # The directory path to the ate_settings.py file.
-ATE_SETTINGS=/home/pi/misfit/ShineProduction/src/ate_settings.py
+ATE_SETTINGS=/home/pi/misfit/Production/src/ate_settings.py
 
 # Update the STATION_ID and STATION_INDEX with the passed in arguments.
 sed -i 's/ID=1/ID='$id'/' $ATE_SETTINGS
@@ -68,15 +68,15 @@ pip install pysimplesoap
 
 # This .rule file is required for communication with the SEGGER flasher.
 echo "Copying JLink rules..."
-sudo cp /home/pi/misfit/ShineProduction/src/segger/99-jlink.rules /etc/udev/rules.d/
+sudo cp /home/pi/misfit/Production/src/segger/99-jlink.rules /etc/udev/rules.d/
 
 # This file configures the GPIO pins of Raspberry Pi to a known safe mode when used with the Lunchbox hardware.  If the pins are not configure correctly, Lunchbox could potentially be damaged.
 echo "Configuring for GPIO safe mode..."
-sudo cp /home/pi/misfit/ShineProduction/transferToPi/rc.local /etc/rc.local
+sudo cp /home/pi/misfit/Production/transferToPi/rc.local /etc/rc.local
 
 # Copy the icon of the runATEUpdater application to the desktop.
 echo "Creating runATEUpdater shortcut..."
-cp /home/pi/misfit/ShineProduction/transferToPi/runATEUpdater.desktop /home/pi/Desktop/
+cp /home/pi/misfit/Production/transferToPi/runATEUpdater.desktop /home/pi/Desktop/
 
 # Reboot the system for changes to take effect.
 echo "Rebooting system..."

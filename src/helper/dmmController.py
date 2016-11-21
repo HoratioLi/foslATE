@@ -10,7 +10,7 @@ import datetime
 from agilent_34461 import A34461
 from PyQt4 import QtCore, QtGui, uic
 
-form_class = uic.loadUiType("/home/pi/misfit/ShineProduction/src/helper/mainwindowdmm.ui")[0]
+form_class = uic.loadUiType("/home/pi/misfit/Production/src/helper/mainwindowdmm.ui")[0]
 
 class DmmWindowClass(QtGui.QMainWindow, form_class):
     def __init__(self, parent=None):

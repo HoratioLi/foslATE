@@ -13,7 +13,7 @@ from PIL import Image, ImageTk
 from helper.posgresDB_extractor import *
 from view.batteryStartGui import startGui
 
-IMAGE_FILE_PATH = '/home/pi/misfit/ShineProduction/src/view/images/batteryPlot.png'
+IMAGE_FILE_PATH = '/home/pi/misfit/Production/src/view/images/batteryPlot.png'
 DELAY_BEFORE_WINDOW_CLOSE = 1 # Number of seconds before GUI window closes after selecting choice
 isRunningOnPi = os.path.isdir("/home/pi")
 

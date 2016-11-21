@@ -12,7 +12,7 @@ import re
 
 
 # Change directory to be able to call git
-os.chdir("/home/pi/misfit/ShineProduction/src/")
+os.chdir("/home/pi/misfit/Production/src/")
 
 
 GIT_PASSWORD_PROMPT = "Enter passphrase for key \'\/home\/pi\/\.ssh\/id_rsa\'\:"

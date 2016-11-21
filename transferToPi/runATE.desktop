@@ -1,8 +1,8 @@
 [Desktop Entry]
 Name=runATE
-Comment=Runs /home/pi/misfit/ShineProduction/src/shine_production_tests.py
+Comment=Runs /home/pi/misfit/Production/src/shine_production_tests.py
 Icon=/usr/share/pixmaps/python.xpm
-Exec=lxterminal -e "/home/pi/misfit/ShineProduction/src/scripts/runATE.sh"
+Exec=lxterminal -e "/home/pi/misfit/Production/src/scripts/runATE.sh"
 Type=Application
 Encoding=UTF-8
 Terminal=false

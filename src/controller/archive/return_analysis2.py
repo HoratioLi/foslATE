@@ -65,7 +65,7 @@ def __startSequence(instr):
 
     # Check whether operating current directory exists
     if SAVE_OP_CURRENT_CSV or SAVE_OP_CURRENT_PNG:
-        subprocess.call("/home/pi/misfit/ShineProduction/src/scripts/checkOpCurrDirectory.sh")
+        subprocess.call("/home/pi/misfit/Production/src/scripts/checkOpCurrDirectory.sh")
 
     return (configureSuccess, params)
 

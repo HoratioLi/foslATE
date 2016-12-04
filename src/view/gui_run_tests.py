@@ -37,6 +37,8 @@ class MainWindowClass(QtGui.QMainWindow, form_class):
         self.totalTestsPassedCount = 0
         self.totalTestsFailedCount = 0
 
+		#** BEGIN: Re-define widgets,by Horatio@11/27/2016 **#
+        '''
         if MANUFACTURER_NAME != "GT":
             self.label.hide()
             self.label_4.hide()
@@ -45,14 +47,21 @@ class MainWindowClass(QtGui.QMainWindow, form_class):
             self.totalTestsFailedLabel.hide()
             self.totalTestsPassedLabel.hide()
             self.totalTestsRunLabel.hide()
+        '''
+		#** END,11/27/2016 **#
 
-        title = "ATE Station %s-%s" % (STATION_ID, STATION_INDEX) 
+		#** Add DEVICE_TYPE into WindowTitle,by Horatio@11/27/2016 **#
+        title = "%s ATE Station %s-%s" % (DEVICE_TYPE,STATION_ID, STATION_INDEX) 
     	self.setWindowTitle(title)	
-
+        '''
     	self.input1CheckBox.hide()
     	self.input2CheckBox.hide()
-        self.input2LineEdit.hide()
-        self.input2Label.hide()
+    	'''
+		#** BEGIN: Enable input2 show,by Horatio@11/27/2016 **#
+        self.input2LineEdit.show()
+        self.input2Label.show()
+        #** END,11/27/2016 **#
+        
     	#self.scannedLineEdit.setFocus()
         self.input1LineEdit.setFocus()
 
@@ -61,6 +70,8 @@ class MainWindowClass(QtGui.QMainWindow, form_class):
     	packagingRegEx = QtCore.QRegExp(SERIAL_NUM_PREFIX + MATCHSTR_REGEX)
     	packagingValidator = QtGui.QRegExpValidator(packagingRegEx)
 
+		#** BEGIN: Disable origin initial operation,by Horatio@11/27/2016 **#
+        '''
         if STATION_ID == 1 or STATION_ID == 1.5 or (STATION_ID == 2 and DEVICE_TYPE == 'SAM'):
     	    self.input1Label.setText("Internal Serial Number (PCB)")
 
@@ -111,7 +122,24 @@ class MainWindowClass(QtGui.QMainWindow, form_class):
                 self.input1Label.setText("Serial Number (PCB or Packaging)")
                 self.input2Label.hide()
                 self.input2LineEdit.hide() 
+        '''
+		#** END,11/27/2016 **#
+		#** BEGIN: define input widget label,by Horatio@11/27/2016 **#
+        self.input1Label.setText("Internal Serial Number (Module)")
+        self.input2Label.setText("Packaged Serial Number (Watch)")
+		#** END,11/27/2016 **#
 
+        #** BEGIN: Add function widget,by Horatio@11/27/2016 **#
+        '''
+        self.label_PASS.show()
+        self.totalTestsPassedLabel.show()
+        self.label_FAIL.show()
+        self.totalTestsFailedLabel.show()
+        self.totalTestsRunLabel.show()
+        self.label_Total.show()
+        '''
+		#** END,11/27/2016 **#
+		
         #self.scannedLineEdit.textChanged.connect(self.textHasChanged)
         gpio_ns_config(POGOPIN_TEST_PIN, "out")
 
@@ -159,7 +187,9 @@ class MainWindowClass(QtGui.QMainWindow, form_class):
 		
     def start(self):
     	testsFailed = None
-    	self.__setStatusLabel(4)
+		#** BEGIN: debug:index 4->0,by Horatio@12/04/2016 **#
+    	self.__setStatusLabel(0)
+		#** END,12/04/2016 **#
         self.updateGui()
 
         if STATION_ID == 1 or STATION_ID == 1.5 or (STATION_ID == 2 and DEVICE_TYPE == 'SAM'):
